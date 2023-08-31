@@ -14,53 +14,32 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getClienti(page: number, order: string): Observable<Clienti[]> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('order', order);
+getClienti(page:Number, order:string): Observable<Clienti[]> {
+  const params = new HttpParams()
 
-    const headers = new HttpHeaders({
-      Authorization: Bearer ${localStorage.getItem('token')}
-    });
-
-    return this.http.get<any>(this.urlClienti, { params, headers })
-      .pipe(map(response => response.content));
-  }
-
-
-
-  getProvinciaById(provincia: string): Observable<Clienti> {
-<<<<<<< HEAD
-    const url = ${this.urlClienti}/${provincia};
-=======
-    const url = `${this.urlClienti}/${provincia}`;
->>>>>>> 8632d473e69f595051a657c45ced4363021588fc
-    const headers = new HttpHeaders({
-      Authorization: Bearer ${localStorage.getItem('token')}
-    });
-    return this.http.get<Clienti>(url, { headers });
-  }
-
-
+  .set('page', page.toString())
+  .set('order', order)
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  });
+  return this.http.get<any>(this.urlClienti, { params, headers })
+    .pipe(map(response => response.content));
+}
 
 creaCliente(cliente: Clienti): Observable<Clienti> {
   const headers = new HttpHeaders({
-    Authorization: Bearer ${localStorage.getItem('token')}
+    Authorization: `Bearer ${localStorage.getItem('token')}`
   });
+
   return this.http.post<Clienti>(this.urlClienti, cliente, { headers });
 }
-
 // ------------------------------------------------------ Fattura
 
 private urlFattura = 'http://localhost:3001/fattura';
 
 creaFattura(fattura: Fattura): Observable<Fattura>{
   const headers = new HttpHeaders({
-<<<<<<< HEAD
-    Authorization: Bearer ${localStorage.getItem('token')}
-=======
     Authorization: `Bearer ${localStorage.getItem('token')}`
->>>>>>> 8632d473e69f595051a657c45ced4363021588fc
   });
   return this.http.post<Fattura>(this.urlFattura, fattura, { headers });
  }
@@ -71,11 +50,7 @@ creaFattura(fattura: Fattura): Observable<Fattura>{
    .set('order', order);
 
    const headers = new HttpHeaders({
-<<<<<<< HEAD
-     Authorization: Bearer ${localStorage.getItem('token')}
-=======
      Authorization: `Bearer ${localStorage.getItem('token')}`
->>>>>>> 8632d473e69f595051a657c45ced4363021588fc
     });
 
     return this.http.get<any>(this.urlFattura, { params, headers })
@@ -83,30 +58,13 @@ creaFattura(fattura: Fattura): Observable<Fattura>{
   }
 
   getFatturaById(fattura: string): Observable<Fattura> {
-<<<<<<< HEAD
-    const url = ${this.urlFattura}/${fattura};
-    const headers = new HttpHeaders({
-      Authorization: Bearer ${localStorage.getItem('token')}
-=======
     const url = `${this.urlFattura}/${fattura}`;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`
->>>>>>> 8632d473e69f595051a657c45ced4363021588fc
     });
     return this.http.get<Fattura>(url, { headers });
   }
 
 }
-//   //CHIAMATA POST PER METTERE FILM NEI PREFERITI
-//   aggiungiFavorites(data: Favorites) {
-//     return this.http.post<Favorites>('http://localhost:4201/favorites', data);
-//   }
-//   // CHIAMATA DELETE PER ELEMINARE FILM DAI PREFERITI
-//   eliminaFavorites(favoriteID: number) {
-//     return this.http.delete(http://localhost:4201/favorites/${favoriteID});
-//   }
-// //CHIAMATA GET PER INFO FILM SPECIFICO
-//   getFilmById(id: number) {
-//     return this.http.get<Movies[]>(http://localhost:4201/movies-popular/${id});
-//   }
+
 

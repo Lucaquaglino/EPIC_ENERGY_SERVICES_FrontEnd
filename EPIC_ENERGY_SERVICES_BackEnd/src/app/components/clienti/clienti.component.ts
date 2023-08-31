@@ -48,6 +48,7 @@ export class ClientiComponent implements OnInit {
   loadClienti() {
     this.provinciaService.getClienti(0, 'ragioneSociale').subscribe(
       (clienti: Clienti[]) => {
+        console.log(clienti);
         this.clienti = clienti;
       },
       (error) => {

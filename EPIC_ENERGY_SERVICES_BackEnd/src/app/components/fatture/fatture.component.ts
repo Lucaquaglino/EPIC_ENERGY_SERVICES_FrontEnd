@@ -11,12 +11,14 @@ export class FattureComponent implements OnInit {
 
   fatture: Fattura[] = [];
   nuovaFattura: Fattura = {
-    "idFattura":"",
+    "id":"",
     "anno":null!,
     "data":"",
     "importo":null!,
     "statoFattura": "",
-    "id_cliente": ""
+    "idCliente": "",
+    "numeroFattura":"",
+    "cliente": undefined
   }
 
   constructor(private FatturaService: AppService) { }
@@ -27,13 +29,15 @@ export class FattureComponent implements OnInit {
 
   loadFatture() {
     this.FatturaService.getFatture(0, 'anno').subscribe(
-      (fatture: Fattura[]) => {
-        this.fatture = fatture;
+      (response) => {
+        console.log(response); // Controlla la risposta completa qui
+        this.fatture = response;
       },
       (error) => {
-        console.error("Error fetching fatture:" , error)
+        console.error("Error fetching fatture:", error);
       }
     );
+
   }
 
   creaNuovaFattura() {
@@ -42,12 +46,14 @@ export class FattureComponent implements OnInit {
         console.log('Fattura creata:', fatturaCreata);
         // Resetta i campi della nuova fattura
         this.nuovaFattura = {
-          "idFattura":"",
+          "id":"",
           "anno":null!,
           "data":"",
           "importo":null!,
           "statoFattura": "",
-          "id_cliente": ""
+          "idCliente": "",
+          "numeroFattura":"",
+          "cliente": undefined
       };
         // Ricarica la lista delle fatture dopo la creazione
         this.loadFatture();

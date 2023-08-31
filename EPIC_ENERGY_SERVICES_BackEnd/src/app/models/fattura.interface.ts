@@ -1,9 +1,11 @@
 
 export interface Fattura {
-  "idFattura":String,
+  "id":String,
   "anno":Number,
   "data":String,
   "importo":Number,
   "statoFattura": String,
-  "id_cliente":String
+  "idCliente":String,
+  "numeroFattura":String,
+  "cliente":any
 }
