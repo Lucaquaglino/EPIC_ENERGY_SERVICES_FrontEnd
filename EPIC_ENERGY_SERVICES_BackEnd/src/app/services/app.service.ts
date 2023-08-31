@@ -10,7 +10,7 @@ import { Fattura } from '../models/fattura.interface';
 })
 export class AppService {
 
-  private baseUrl = 'http://localhost:3001/clienti'; // Controlla l'URL del backend
+  private urlClienti = 'http://localhost:3001/clienti'; // Controlla l'URL del backend
 
   constructor(private http: HttpClient) { }
 
@@ -23,14 +23,14 @@ export class AppService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
 
-    return this.http.get<any>(this.baseUrl, { params, headers })
+    return this.http.get<any>(this.urlClienti, { params, headers })
       .pipe(map(response => response.content));
   }
 
 
 
   getProvinciaById(provincia: string): Observable<Clienti> {
-    const url = `${this.baseUrl}/${provincia}`;
+    const url = `${this.urlClienti}/${provincia}`;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
@@ -43,15 +43,18 @@ creaCliente(cliente: Clienti): Observable<Clienti> {
   const headers = new HttpHeaders({
     Authorization: `Bearer ${localStorage.getItem('token')}`
   });
-  return this.http.post<Clienti>(this.baseUrl, cliente, { headers });
+  return this.http.post<Clienti>(this.urlClienti, cliente, { headers });
 }
 
 // ------------------------------------------------------ Fattura
+
+private urlFattura = 'http://localhost:3001/fattura';
+
 creaFattura(fattura: Fattura): Observable<Fattura>{
   const headers = new HttpHeaders({
     Authorization: `Bearer ${localStorage.getItem('token')}`
   });
-  return this.http.post<Fattura>(this.baseUrl, fattura, { headers });
+  return this.http.post<Fattura>(this.urlFattura, fattura, { headers });
  }
 
  getFatture(page: number, order: string): Observable<Fattura[]> {
@@ -63,8 +66,16 @@ creaFattura(fattura: Fattura): Observable<Fattura>{
      Authorization: `Bearer ${localStorage.getItem('token')}`
     });
 
-    return this.http.get<any>(this.baseUrl, { params, headers })
+    return this.http.get<any>(this.urlFattura, { params, headers })
     .pipe(map(response => response.content));
+  }
+
+  getFatturaById(fattura: string): Observable<Fattura> {
+    const url = `${this.urlFattura}/${fattura}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<Fattura>(url, { headers });
   }
 
 }

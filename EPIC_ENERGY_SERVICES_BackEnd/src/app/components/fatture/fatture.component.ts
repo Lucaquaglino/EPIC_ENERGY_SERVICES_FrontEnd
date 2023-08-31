@@ -11,6 +11,7 @@ export class FattureComponent implements OnInit {
 
   fatture: Fattura[] = [];
   nuovaFattura: Fattura = {
+    "idFattura":"",
     "anno":null!,
     "data":"",
     "importo":null!,
@@ -39,15 +40,16 @@ export class FattureComponent implements OnInit {
     this.FatturaService.creaFattura(this.nuovaFattura).subscribe(
       (fatturaCreata: Fattura) => {
         console.log('Fattura creata:', fatturaCreata);
-        // Resetta i campi del nuovo cliente
+        // Resetta i campi della nuova fattura
         this.nuovaFattura = {
+          "idFattura":"",
           "anno":null!,
           "data":"",
           "importo":null!,
           "statoFattura": "",
           "id_cliente": ""
       };
-        // Ricarica la lista dei clienti dopo la creazione
+        // Ricarica la lista delle fatture dopo la creazione
         this.loadFatture();
       },
       (error) => {
