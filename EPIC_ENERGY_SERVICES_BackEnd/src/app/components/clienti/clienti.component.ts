@@ -36,7 +36,9 @@ export class ClientiComponent implements OnInit {
   "dataInserimento":"",
   "ultimoContatto":"",
   "fatturatoAnnuale":null!,
-"fatture":""
+"fatture":"",
+"indirizzoSedeLegale": undefined,
+"civico":""
 };
 
   constructor(private provinciaService: AppService) {}
@@ -88,7 +90,9 @@ export class ClientiComponent implements OnInit {
         "dataInserimento":"",
         "ultimoContatto":"",
         "fatturatoAnnuale":null!,
-      "fatture":""
+      "fatture":"",
+      "indirizzoSedeLegale": undefined,
+      "civico":""
       };
         // Ricarica la lista dei clienti dopo la creazione
         this.loadClienti();

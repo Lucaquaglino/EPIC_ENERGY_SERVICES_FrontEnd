@@ -23,7 +23,9 @@ export interface Clienti {
     "dataInserimento":String,
     "ultimoContatto":String,
     "fatturatoAnnuale":Number,
-  "fatture":String
+  "fatture":String,
+  "indirizzoSedeLegale": any,
+  "civico":String,
 
 
 }
