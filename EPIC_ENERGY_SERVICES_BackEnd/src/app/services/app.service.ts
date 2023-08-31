@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Clienti } from '../models/clienti.interface';
 import { map } from 'rxjs';
+import { Fattura } from '../models/fattura.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -44,8 +45,29 @@ creaCliente(cliente: Clienti): Observable<Clienti> {
   });
   return this.http.post<Clienti>(this.baseUrl, cliente, { headers });
 }
-}
 
+// ------------------------------------------------------ Fattura
+creaFattura(fattura: Fattura): Observable<Fattura>{
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  });
+  return this.http.post<Fattura>(this.baseUrl, fattura, { headers });
+ }
+
+ getFatture(page: number, order: string): Observable<Fattura[]> {
+   const params = new HttpParams()
+   .set('page', page.toString())
+   .set('order', order);
+
+   const headers = new HttpHeaders({
+     Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get<any>(this.baseUrl, { params, headers })
+    .pipe(map(response => response.content));
+  }
+
+}
 //   //CHIAMATA POST PER METTERE FILM NEI PREFERITI
 //   aggiungiFavorites(data: Favorites) {
 //     return this.http.post<Favorites>('http://localhost:4201/favorites', data);
