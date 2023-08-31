@@ -5,7 +5,7 @@ export interface Fattura {
   "data":String,
   "importo":Number,
   "statoFattura": String,
-  "idCliente":String,
+  "idCliente":any,
   "numeroFattura":String,
   "cliente":any
 }

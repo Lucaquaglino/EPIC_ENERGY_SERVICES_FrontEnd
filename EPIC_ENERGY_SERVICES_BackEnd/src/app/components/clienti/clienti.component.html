@@ -166,7 +166,12 @@
         <td>{{ cliente.ultimoContatto }}</td>
         <td>{{ cliente.fatturatoAnnuale }}</td>
         <!-- <td>{{ cliente.fatture }}</td> -->
-        <td>{{ cliente.indirizzoSedeLegale.localita }}</td>
+        <ul>
+          <li *ngFor="let fattura of cliente.fatture">
+importo : {{ fattura.importo}}
+          </li>
+        </ul>
+        <!-- <td>{{ cliente.indirizzoSedeL }}</td> -->
         <td>
           <td >
             <div    class="btn-group" role="group">

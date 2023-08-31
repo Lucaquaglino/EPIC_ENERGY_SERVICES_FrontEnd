@@ -40,21 +40,46 @@ export class FattureComponent implements OnInit {
 
   }
 
+  // creaNuovaFattura() {
+  //   this.FatturaService.creaFattura(this.nuovaFattura).subscribe(
+  //     (fatturaCreata: Fattura) => {
+  //       console.log('Fattura creata:', fatturaCreata);
+  //       // Resetta i campi della nuova fattura
+  //       this.nuovaFattura = {
+  //         "id":"",
+  //         "anno":null!,
+  //         "data":"",
+  //         "importo":null!,
+  //         "statoFattura": "",
+  //         "idCliente": "",
+  //         "numeroFattura":"",
+  //         "cliente": undefined
+  //     };
+  //       // Ricarica la lista delle fatture dopo la creazione
+  //       this.loadFatture();
+  //     },
+  //     (error) => {
+  //       console.error('Errore durante la creazione della fattura:', error);
+  //     }
+  //   );
+  // }
   creaNuovaFattura() {
-    this.FatturaService.creaFattura(this.nuovaFattura).subscribe(
+    const clienteId = this.nuovaFattura.idCliente;
+
+    this.FatturaService.creaFattura(this.nuovaFattura, clienteId).subscribe(
       (fatturaCreata: Fattura) => {
         console.log('Fattura creata:', fatturaCreata);
         // Resetta i campi della nuova fattura
         this.nuovaFattura = {
-          "id":"",
-          "anno":null!,
-          "data":"",
-          "importo":null!,
+          "id": "",
+          "anno": null!,
+          "data": "",
+          "importo": null!,
           "statoFattura": "",
           "idCliente": "",
-          "numeroFattura":"",
+          "numeroFattura": "",
           "cliente": undefined
-      };
+        };
         // Ricarica la lista delle fatture dopo la creazione
         this.loadFatture();
       },
@@ -63,5 +88,8 @@ export class FattureComponent implements OnInit {
       }
     );
   }
+
+
+
 
 }

@@ -11,7 +11,7 @@ import { Fattura } from '../models/fattura.interface';
 export class AppService {
 
   private urlClienti = 'http://localhost:3001/clienti'; // Controlla l'URL del backend
-
+private urlClientifiltroragionesociale='http://localhost:3001/clienti/filter/ragioneSociale';
   constructor(private http: HttpClient) { }
 
 getClienti(page:Number, order:string): Observable<Clienti[]> {
@@ -37,12 +37,24 @@ creaCliente(cliente: Clienti): Observable<Clienti> {
 
 private urlFattura = 'http://localhost:3001/fattura';
 
-creaFattura(fattura: Fattura): Observable<Fattura>{
+// creaFattura(fattura: Fattura): Observable<Fattura>{
+//   const headers = new HttpHeaders({
+//     Authorization: `Bearer ${localStorage.getItem('token')}`
+//   });
+//   return this.http.post<Fattura>(this.urlFattura, fattura, { headers });
+//  }
+
+creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
   const headers = new HttpHeaders({
     Authorization: `Bearer ${localStorage.getItem('token')}`
   });
-  return this.http.post<Fattura>(this.urlFattura, fattura, { headers });
- }
+
+  // Aggiungi il parametro clienteId all'URL
+  const urlWithParams = `${this.urlFattura}?clienteId=${clienteId}`;
+
+  return this.http.post<Fattura>(urlWithParams, fattura, { headers });
+}
+
 
  getFatture(page: number, order: string): Observable<Fattura[]> {
    const params = new HttpParams()
@@ -63,6 +75,21 @@ creaFattura(fattura: Fattura): Observable<Fattura>{
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<Fattura>(url, { headers });
+  }
+
+
+
+  getClientiRagioneSociale(page:number, pageSize:number, parteRagioneSociale:string): Observable<Clienti[]> {
+    const params = new HttpParams()
+
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString())
+    .set('parteRagioneSociale', parteRagioneSociale)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(this.urlClientifiltroragionesociale, { params, headers })
+      .pipe(map(response => response.content));
   }
 
 }

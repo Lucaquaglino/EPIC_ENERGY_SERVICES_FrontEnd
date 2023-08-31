@@ -36,7 +36,7 @@ export class ClientiComponent implements OnInit {
   "dataInserimento":"",
   "ultimoContatto":"",
   "fatturatoAnnuale":null!,
-"fatture":"",
+"fatture": undefined,
 "indirizzoSedeLegale": undefined,
 "civico":""
 };
@@ -45,6 +45,7 @@ export class ClientiComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClienti();
+    this.getFiltroRagioneSociale()
   }
 
   loadClienti() {
@@ -54,7 +55,7 @@ export class ClientiComponent implements OnInit {
         this.clienti = clienti;
       },
       (error) => {
-        console.error('Error fetching province:', error);
+        console.error('Error fetching clienti:', error);
       }
     );
   }
@@ -90,7 +91,7 @@ export class ClientiComponent implements OnInit {
         "dataInserimento":"",
         "ultimoContatto":"",
         "fatturatoAnnuale":null!,
-      "fatture":"",
+        "fatture": undefined,
       "indirizzoSedeLegale": undefined,
       "civico":""
       };
@@ -102,6 +103,24 @@ export class ClientiComponent implements OnInit {
       }
     );
   }
+
+
+
+  getFiltroRagioneSociale():void {
+
+    const rg="ciao";
+    const page = 0;
+    const pageSize =10;
+    this.provinciaService.getClientiRagioneSociale(page,pageSize,rg).subscribe((response)=>{
+      console.log( "filtro",response)},
+      (error)=>{
+        console.error(error)
+      }
+    )
+    }
+
+
+
 }
 
 

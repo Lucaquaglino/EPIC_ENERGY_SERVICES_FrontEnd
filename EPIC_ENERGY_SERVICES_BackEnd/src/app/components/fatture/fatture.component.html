@@ -21,7 +21,7 @@
         <td>{{ fattura.importo }}</td>
         <td>{{ fattura.numeroFattura }}</td>
         <td>{{ fattura.statoFattura }}</td>
-        <td>{{ fattura.idCliente}}</td>
+        <td>{{ fattura.cliente.idCliente}}</td>
 
         <td>
           <td >
@@ -62,7 +62,7 @@
 
     <div class="form-group">
       <label for="id_cliente">Id Cliente</label>
-      <input type="text" class="form-control" id="id_cliente" [(ngModel)]="nuovaFattura.idCliente" name="id_cliente" required>
+      <input type="text" class="form-control" id="id_cliente" [(ngModel)]="nuovaFattura.idCliente" name="idcliente" required>
         </div>
 
     <button type="submit" class="btn btn-primary">Salva</button>
