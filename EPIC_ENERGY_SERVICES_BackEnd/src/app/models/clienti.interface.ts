@@ -20,7 +20,10 @@ export interface Clienti {
     "localitaDue":String,
     "capDue":String,
     "comuneDue":String,
-    "dataInserimento":String
+    "dataInserimento":String,
+    "ultimoContatto":String,
+    "fatturatoAnnuale":Number,
+  "fatture":String
 
 
 }

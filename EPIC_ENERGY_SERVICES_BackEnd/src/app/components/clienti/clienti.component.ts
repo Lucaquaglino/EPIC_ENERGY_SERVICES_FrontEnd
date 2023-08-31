@@ -33,8 +33,10 @@ export class ClientiComponent implements OnInit {
   "localitaDue":"",
   "capDue":"",
   "comuneDue":"",
-  "dataInserimento":""
-
+  "dataInserimento":"",
+  "ultimoContatto":"",
+  "fatturatoAnnuale":null!,
+"fatture":""
 };
 
   constructor(private provinciaService: AppService) {}
@@ -62,7 +64,7 @@ export class ClientiComponent implements OnInit {
         // Resetta i campi del nuovo cliente
         this.nuovoCliente = {
           "idCliente":"",
-          "ragioneSociale": "",
+           "ragioneSociale": "",
         "partitaIva":"",
         "emailCliente":"",
         "pec":"",
@@ -82,8 +84,10 @@ export class ClientiComponent implements OnInit {
         "localitaDue":"",
         "capDue":"",
         "comuneDue":"",
-        "dataInserimento":""
-
+        "dataInserimento":"",
+        "ultimoContatto":"",
+        "fatturatoAnnuale":null!,
+      "fatture":""
       };
         // Ricarica la lista dei clienti dopo la creazione
         this.loadClienti();

@@ -27,13 +27,27 @@
       </div>
 
       <div class="form-group">
-        <label for="telefonoCliente">Telefono Cliente:</label>
-        <input type="tel" class="form-control" id="telefonoCliente" [(ngModel)]="nuovoCliente.telefonoCliente" name="telefonoCliente" required>
+        <label for="tipoCliente">Tipo Cliente:</label>
+        <div class="input-group">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="dropdown-icon">▼</span>
+            </div>
+          </div>
+          <select class="form-control" id="tipoCliente" [(ngModel)]="nuovoCliente.tipoCliente" name="tipoCliente" required>
+            <option value="PA">PA</option>
+            <option value="SAS">SAS</option>
+            <option value="SPA">SPA</option>
+            <option value="SRL">SRL</option>
+          </select>
+
+        </div>
       </div>
 
+
       <div class="form-group">
-        <label for="tipoCliente">Tipo Cliente:</label>
-        <input type="text" class="form-control" id="tipoCliente" [(ngModel)]="nuovoCliente.tipoCliente" name="tipoCliente" required>
+        <label for="tipoCliente">TelefonoCliente:</label>
+        <input type="text" class="form-control" id="telefonoCliente" [(ngModel)]="nuovoCliente.telefonoCliente" name="telefonoCliente" required>
       </div>
 
       <div class="form-group">
@@ -149,6 +163,9 @@
         <td>{{ cliente.cognomeContatto }}</td>
         <td>{{ cliente.telefonoContatto }}</td>
         <td>{{ cliente.dataInserimento }}</td>
+        <td>{{ cliente.ultimoContatto }}</td>
+        <td>{{ cliente.fatturatoAnnuale }}</td>
+        <td>{{ cliente.fatture }}</td>
         <td>
           <td >
             <div    class="btn-group" role="group">
