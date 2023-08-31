@@ -7,27 +7,33 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./clienti.component.scss']
 })
 export class ClientiComponent implements OnInit {
+
+  showAggiungiForm: boolean = false;
+
   clienti: Clienti[] = [];
-  nuovoCliente: Clienti = {  "ragioneSociale": "",
+  nuovoCliente: Clienti = {
+    "idCliente":"",
+     "ragioneSociale": "",
   "partitaIva":"",
   "emailCliente":"",
   "pec":"",
-  "telefonoCliente":0,
+  "telefonoCliente":null!,
   "tipoCliente":"",
   "nomeContatto":"",
   "cognomeContatto":"",
   "emailContatto":"",
   "telefonoContatto":"",
   "viaUno":"",
-  "civicoUno":0,
+  "civicoUno":null!,
   "localitaUno":"",
   "capUno":"",
   "comuneUno":"",
   "viaDue":"",
-  "civicoDue":0,
+  "civicoDue":null!,
   "localitaDue":"",
   "capDue":"",
-  "comuneDue":""
+  "comuneDue":"",
+  "dataInserimento":""
 
 };
 
@@ -54,26 +60,29 @@ export class ClientiComponent implements OnInit {
       (clienteCreato: Clienti) => {
         console.log('Cliente creato:', clienteCreato);
         // Resetta i campi del nuovo cliente
-        this.nuovoCliente = {  "ragioneSociale": "",
+        this.nuovoCliente = {
+          "idCliente":"",
+          "ragioneSociale": "",
         "partitaIva":"",
         "emailCliente":"",
         "pec":"",
-        "telefonoCliente":0,
+        "telefonoCliente":null!,
         "tipoCliente":"",
         "nomeContatto":"",
         "cognomeContatto":"",
         "emailContatto":"",
         "telefonoContatto":"",
         "viaUno":"",
-        "civicoUno":0,
+        "civicoUno":null!,
         "localitaUno":"",
         "capUno":"",
         "comuneUno":"",
         "viaDue":"",
-        "civicoDue":0,
+        "civicoDue":null!,
         "localitaDue":"",
         "capDue":"",
-        "comuneDue":""
+        "comuneDue":"",
+        "dataInserimento":""
 
       };
         // Ricarica la lista dei clienti dopo la creazione
