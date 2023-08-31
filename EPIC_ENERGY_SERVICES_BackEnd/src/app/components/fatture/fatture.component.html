@@ -1,1 +1,71 @@
-<p>fatture works!</p>
+<div class="container mt-4">
+  <h2>Lista Fatture  <button class="btn btn-primary" >Aggiungi Fatture</button></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID Fattura</th>
+        <th>Anno</th>
+        <th>Data emissione</th>
+        <th>Importo</th>
+        <th>Numero fattura</th>
+        <th>Stato fattura</th>
+        <th>Id Cliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fattura of fatture">
+
+        <td>{{ fattura.idFattura}}</td>
+        <td>{{ fattura.anno}}</td>
+        <td>{{ fattura.data }}</td>
+        <td>{{ fattura.importo }}</td>
+        <td>{{ fattura.statoFattura }}</td>
+        <td>{{ fattura.id_cliente}}</td>
+
+        <td>
+          <td >
+            <div    class="btn-group" role="group">
+              <button class="btn btn-primary" >Modifica</button>
+              <button class="btn btn-danger" >Elimina</button>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+  <h2>Modifica Fattura</h2>
+  <form (submit)="creaNuovaFattura()">
+
+    <div class="form-group">
+      <label for="Anno">Anno:</label>
+      <input type="number" class="form-control" id="anno" [(ngModel)]="nuovaFattura.anno" name="anno" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Data emissione">Data emissione:</label>
+      <input type="date" class="form-control" id="dataEmissione" [(ngModel)]="nuovaFattura.data" name="dataEmissione" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Importo">Importo:</label>
+      <input type="number" class="form-control" id="importo" [(ngModel)]="nuovaFattura.importo" name="importo" required>
+    </div>
+
+    <div class="form-group">
+      <label for="statoFattura">Stato Fattura:</label>
+      <input type="text" class="form-control" id="statoFattura" [(ngModel)]="nuovaFattura.statoFattura" name="statoFattura" required>
+    </div>
+
+    <div class="form-group">
+      <label for="id_cliente">Id Cliente</label>
+      <input type="text" class="form-control" id="id_cliente" [(ngModel)]="nuovaFattura.id_cliente" name="id_cliente" required>
+        </div>
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="button" class="btn btn-secondary" >Annulla</button>
+  </form>
+</div>
+
