@@ -9,11 +9,11 @@ import { map } from 'rxjs';
 })
 export class AppService {
 
-  private baseUrl = 'http://localhost:3001/provincia'; // Controlla l'URL del backend
+  private baseUrl = 'http://localhost:3001/clienti'; // Controlla l'URL del backend
 
   constructor(private http: HttpClient) { }
 
-  getProvince(page: number, order: string): Observable<Clienti[]> {
+  getClienti(page: number, order: string): Observable<Clienti[]> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('order', order);
@@ -35,11 +35,16 @@ export class AppService {
     });
     return this.http.get<Clienti>(url, { headers });
   }
+
+
+
+creaCliente(cliente: Clienti): Observable<Clienti> {
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  });
+  return this.http.post<Clienti>(this.baseUrl, cliente, { headers });
 }
-
-
-
-
+}
 
 //   //CHIAMATA POST PER METTERE FILM NEI PREFERITI
 //   aggiungiFavorites(data: Favorites) {

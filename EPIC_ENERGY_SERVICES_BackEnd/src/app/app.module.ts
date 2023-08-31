@@ -11,12 +11,19 @@ import { ClientiComponent } from './components/clienti/clienti.component';
 import { FattureComponent } from './components/fatture/fatture.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { TokenInterceptor } from './auth/token.interceptor'; // Importa il tuo interceptor
+import { TokenInterceptor } from './auth/token.interceptor';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const rotte: Route[] = [
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   {
     path: 'clienti',
     component: ClientiComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'navbar',
+    component: NavbarComponent,
     // canActivate: [AuthGuard]
   },
   {
@@ -41,7 +48,8 @@ const rotte: Route[] = [
     ClientiComponent,
     FattureComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent
   ],
   imports: [
     FormsModule,

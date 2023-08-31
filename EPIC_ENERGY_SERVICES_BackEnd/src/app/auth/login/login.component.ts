@@ -21,12 +21,12 @@ export class LoginComponent implements OnInit {
         // Login effettuato con successo
         const token = this.authService.getToken();
         console.log('Token:', token); // Verifica il token nella console
-        // Esempio: Effettua reindirizzamento a una pagina dopo il login
-        // this.router.navigate(['/dashboard']);
+
         this.router.navigate(['/clienti']);
+        console.log('Login effettuato:', response);
       },
       (error) => {
-        // Gestisci l'errore di login
+
         console.error('Errore di login:', error);
       }
     );
