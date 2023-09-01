@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Fattura } from '../../models/fattura.interface';
 import { AppService } from 'src/app/services/app.service';
 import { FormsModule } from '@angular/forms';
+import { Clienti } from 'src/app/models/clienti.interface';
 
 @Component({
   selector: 'app-fatture',
@@ -10,6 +11,29 @@ import { FormsModule } from '@angular/forms';
 })
 export class FattureComponent implements OnInit {
   showAggiungiForm: boolean = false;
+  page = 0;
+  pageSize = 10;
+  idCliente = "";
+  statoFattura = "";
+  dataFattura = "";
+  annoFattura = 0;
+  showIdClienteFiltro: boolean = false;
+  showStatoFatturaFiltro:boolean = false;
+  showDataFatturaFiltro: boolean = false;
+  showAnnoFatturaFiltro: boolean = false;
+  toggleIdClienteForm() {
+    this.showIdClienteFiltro = !this.showIdClienteFiltro;
+  }
+  toggleStatoFatturaForm() {
+    this.showStatoFatturaFiltro = !this.showStatoFatturaFiltro;
+  }
+  toggleDataFatturaForm() {
+    this.showDataFatturaFiltro = !this.showDataFatturaFiltro;
+  }
+  toggleAnnoFatturaForm() {
+    this.showAnnoFatturaFiltro = !this.showAnnoFatturaFiltro;
+  }
+
 
   fatture: Fattura[] = [];
   nuovaFattura: Fattura = {
@@ -90,6 +114,46 @@ export class FattureComponent implements OnInit {
       }
     );
   }
+
+  getFiltroRagioneSociale():void {
+    const rg=this.idCliente;
+    this.FatturaService.getClientiRagioneSociale(this.page, this.pageSize, this.idCliente).subscribe((clienti: Clienti[])=>{
+      console.log(clienti)},
+      (error)=>{
+        console.error("Error fetching clienti", error)
+      }
+    )
+    }
+
+    getFiltroStatoFattura():void {
+      const st = this.statoFattura;
+    this.FatturaService.getFatturaByStatoFattura(this.page, this.pageSize, st).subscribe((response) =>{
+      console.log("filtro", response)},
+      (error)=>{
+        console.error(error)
+      }
+    )
+    }
+
+    getFiltroDataFattura():void {
+      const df = this.dataFattura;
+    this.FatturaService.getFatturaByData(this.page, this.pageSize, df).subscribe((response) =>{
+      console.log("filtro", response)},
+      (error)=>{
+        console.error(error)
+      }
+    )
+    }
+
+    getFiltroAnnoFattura():void {
+      const af = this.annoFattura;
+    this.FatturaService.getFatturaByAnno(this.page, this.pageSize, af).subscribe((response) =>{
+      console.log("filtro", response)},
+      (error)=>{
+        console.error(error)
+      }
+    )
+    }
 
   onDeleteFatture(id: string): void {
     this.FatturaService.deleteFattura(id).subscribe(
