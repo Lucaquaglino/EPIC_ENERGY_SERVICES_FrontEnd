@@ -12,6 +12,7 @@ export class AppService {
 
   private urlClienti = 'http://localhost:3001/clienti'; // Controlla l'URL del backend
 private urlClientifiltroragionesociale='http://localhost:3001/clienti/filter/ragioneSociale';
+private urlFatturaFiltroStatoFattura = 'http://localhost:3001/fattura/filter/statoFattura';
   constructor(private http: HttpClient) { }
 
 getClienti(page:Number, order:string): Observable<Clienti[]> {
@@ -77,7 +78,13 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
     return this.http.get<Fattura>(url, { headers });
   }
 
-
+  getClienteById(cliente: string): Observable<Clienti> {
+    const url = `${this.urlClienti}/${cliente}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<Clienti>(url, { headers });
+  }
 
   getClientiRagioneSociale(parteRagioneSociale:string,page:number, pageSize:number ): Observable<Clienti[]> {
     const params = new HttpParams()
@@ -97,7 +104,7 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
 
     .set('page', page.toString())
     .set('pageSize', pageSize.toString())
-    .set('parteRagioneSociale', parteRagioneSociale)
+    .set('parteRagioneSociale', parteRagioneSociale.toString())
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
@@ -105,6 +112,41 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
       .pipe(map(response => response.content));
   }
 
+  getFatturaByStatoFattura(page:number, pageSize:number, statoFattura:string): Observable<Fattura[]> {
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString())
+    .set('parteRagioneSociale', statoFattura.toString())
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(this.urlFatturaFiltroStatoFattura, { params, headers })
+      .pipe(map(response => response.content));
+  }
+
+  getFatturaByData(page:number, pageSize:number, dataFattura:string): Observable<Fattura[]> {
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString())
+    .set('parteRagioneSociale', dataFattura.toString())
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>('http://localhost:3001/fattura/filter/data')
+      .pipe(map(response => response.content));
+  }
+
+  getFatturaByAnno(page:number, pageSize:number, anno:number): Observable<Fattura[]> {
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString())
+    .set('parteRagioneSociale', anno)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>('http://localhost:3001/fattura/filter/anno')
+      .pipe(map(response => response.content));
+  }
 
   deleteCliente(id: string): Observable<Clienti[]> {
     const headers = new HttpHeaders({
