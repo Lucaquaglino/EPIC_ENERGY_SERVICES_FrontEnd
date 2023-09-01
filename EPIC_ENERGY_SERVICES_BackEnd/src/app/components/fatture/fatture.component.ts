@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./fatture.component.scss']
 })
 export class FattureComponent implements OnInit {
+  showAggiungiForm: boolean = false;
 
   fatture: Fattura[] = [];
   nuovaFattura: Fattura = {
