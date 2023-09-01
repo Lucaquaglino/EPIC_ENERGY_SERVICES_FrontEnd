@@ -92,7 +92,18 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
       .pipe(map(response => response.content));
   }
 
+  getClientiPaginazione(page:number, pageSize:number, parteRagioneSociale:string): Observable<Clienti[]> {
+    const params = new HttpParams()
 
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString())
+    .set('parteRagioneSociale', parteRagioneSociale)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(this.urlClientifiltroragionesociale, { params, headers })
+      .pipe(map(response => response.content));
+  }
 
 
   deleteCliente(id: string): Observable<Clienti[]> {
@@ -112,6 +123,35 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
     const url = `${this.urlFattura}/${id}`;
 
     return this.http.delete<any>(url, { headers });
+  }
+
+
+
+  getClientiByFatturatoAnnuale(fatturatoAnnuale: number, page: number, pageSize: number): Observable<Clienti[]> {
+    const params = new HttpParams()
+      .set('fatturatoAnnuale', fatturatoAnnuale.toString())
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get<any>(`${this.urlClienti}/filter/fatturatoAnnuale`, { params, headers })
+      .pipe(map(response => response.content));
+  }
+  getClientiByDataInserimento(dataInserimento: string, page: number, pageSize: number): Observable<Clienti[]> {
+    const params = new HttpParams()
+      .set('dataInserimento', dataInserimento.toString())
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get<any>(`${this.urlClienti}/filter/dataInserimento`, { params, headers })
+      .pipe(map(response => response.content));
   }
 }
 

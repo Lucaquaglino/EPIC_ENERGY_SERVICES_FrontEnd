@@ -7,9 +7,23 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./clienti.component.scss']
 })
 export class ClientiComponent implements OnInit {
+  page = 0; // Imposta la pagina iniziale
+  pageSize =10;
+ragioneSociale = "ragioneSociale"
+dataInserimento ="dataInserimento"
+showFatturatoForm: boolean = false;
+showDataInserimentoForm:boolean = false;
+toggleFatturatoForm() {
+  this.showFatturatoForm = !this.showFatturatoForm;
+}
+toggleDataInserimentoForm() {
+  this.showDataInserimentoForm = !this.showDataInserimentoForm
 
+}
+fatturatoAnnuale= 0;
   showAggiungiForm: boolean = false;
-
+  totalPages = 0;
+  currentPage = 0;
   clienti: Clienti[] = [];
   nuovoCliente: Clienti = {
     "idCliente":"",
@@ -43,22 +57,64 @@ export class ClientiComponent implements OnInit {
 
   constructor(private provinciaService: AppService) {}
 
-  ngOnInit(): void {
-    this.loadClienti();
-    this.getFiltroRagioneSociale()
-  }
 
-  loadClienti() {
-    this.provinciaService.getClienti(0, 'ragioneSociale').subscribe(
+    ngOnInit(): void {
+
+      this.loadClienti();
+      this.getFiltroRagioneSociale();
+    }
+
+
+
+  // loadClienti() {
+  //   this.provinciaService.getClienti(0, 'ragioneSociale').subscribe(
+  //     (clienti: Clienti[]) => {
+  //       console.log(clienti);
+  //       this.clienti = clienti;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching clienti:', error);
+  //     }
+  //   );
+  // }
+  // loadClienti2222222(): void {
+  //   const pageSize =10;
+  //   this.provinciaService.getClienti(page, pageSize).subscribe(
+  //     (response) => {
+  //       console.log( "filtro",response)
+  //     },
+  //     (error) => {
+  //       console.error("Error fetching clienti:", error);
+  //     }
+  //   );
+  // }
+  loadClienti(): void {
+
+    this.provinciaService.getClienti(this.page, 'ragioneSociale').subscribe(
       (clienti: Clienti[]) => {
         console.log(clienti);
         this.clienti = clienti;
       },
       (error) => {
-        console.error('Error fetching clienti:', error);
+        console.error("Error fetching clienti:", error);
       }
     );
   }
+
+
+
+    nextPage() {
+      this.page++; // Vai alla pagina successiva
+      this.loadClienti();
+
+    }
+
+    previousPage() {
+      if (this.page > 0) {
+        this.page--; // Vai alla pagina precedente solo se non sei sulla prima pagina
+        this.loadClienti();
+      }
+    }
 
 
   creaNuovoCliente() {
@@ -96,7 +152,7 @@ export class ClientiComponent implements OnInit {
       "civico":""
       };
         // Ricarica la lista dei clienti dopo la creazione
-        this.loadClienti();
+        // this.loadClienti();
       },
       (error) => {
         console.error('Errore durante la creazione del cliente:', error);
@@ -133,6 +189,30 @@ export class ClientiComponent implements OnInit {
     }
 
 
+    applyFatturatoFilter(): void {
+      this.provinciaService.getClientiByFatturatoAnnuale(this.fatturatoAnnuale, this.page, this.pageSize).subscribe(
+        (clienti: Clienti[]) => {
+          console.log(clienti);
+          this.clienti = clienti;
+        },
+        (error) => {
+          console.error("Error fetching clienti:", error);
+        }
+      );
+    }
+
+
+    applyDataInserimentoFilter(): void {
+      this.provinciaService.getClientiByDataInserimento(this.dataInserimento, this.page, this.pageSize).subscribe(
+        (clienti: Clienti[]) => {
+          console.log(clienti);
+          this.clienti = clienti;
+        },
+        (error) => {
+          console.error("Error fetching clienti:", error);
+        }
+      );
+    }
 }
 
 

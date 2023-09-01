@@ -1,7 +1,28 @@
 
 
 <div class="container mt-4">
-  <h2>Lista Clienti <button class="btn btn-primary" (click)="showAggiungiForm = true">Aggiungi Cliente</button></h2>
+  <h2>Lista Clienti <button class="btn btn-primary m-2" (click)="showAggiungiForm = true">Aggiungi Cliente</button><button class="btn btn-primary" (click)="toggleFatturatoForm()">Filtra per fatturato Annuo</button> <button class="btn btn-primary m-2" (click)="toggleDataInserimentoForm()">Mostra/Nascondi Filtro Data Inserimento</button></h2>
+    <!-- Bottone per mostrare/nascondere il form -->
+
+ <!-- Bottone per mostrare/nascondere il form di filtro per la data di inserimento -->
+
+
+ <!-- Form per il filtro della data di inserimento -->
+ <div class="form-container" *ngIf="showDataInserimentoForm">
+   <div class="form-group">
+     <label for="dataInserimento">Data Inserimento:</label>
+     <input type="date" class="form-control" id="dataInserimento" [(ngModel)]="dataInserimento">
+   </div>
+   <button class="btn btn-primary" (click)="applyDataInserimentoFilter()">Applica Filtro</button>
+ </div>
+    <!-- Form per l'inserimento del fatturato annuale -->
+    <div class="form-container" *ngIf="showFatturatoForm">
+      <div class="form-group">
+        <label for="fatturatoAnnuale">Fatturato Annuale:</label>
+        <input type="number" class="form-control" id="fatturatoAnnuale" [(ngModel)]="fatturatoAnnuale">
+      </div>
+      <button class="btn btn-primary" (click)="applyFatturatoFilter()">Applica Filtro</button>
+    </div>
   <div class="container" *ngIf="showAggiungiForm">
   <div class="container">
     <h2>Modifica Cliente</h2>
@@ -130,6 +151,7 @@
     </form>
   </div>
 </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -166,11 +188,11 @@
         <td>{{ cliente.ultimoContatto }}</td>
         <td>{{ cliente.fatturatoAnnuale }}</td>
         <!-- <td>{{ cliente.fatture }}</td> -->
-        <ul>
+        <!-- <ul>
           <li *ngFor="let fattura of cliente.fatture">
                 importo : {{ fattura.importo}}
           </li>
-        </ul>
+        </ul> -->
         <!-- <td>{{ cliente.indirizzoSedeL }}</td> -->
         <td>
           <td >
@@ -182,5 +204,9 @@
       </tr>
     </tbody>
   </table>
+  <div>
+    <button class="btn btn-secondary" (click)="previousPage()" >Pagina precedente</button>
+    <button class="btn btn-secondary m-3" (click)="nextPage()" >Pagina successiva</button>
+  </div>
 </div>
 
