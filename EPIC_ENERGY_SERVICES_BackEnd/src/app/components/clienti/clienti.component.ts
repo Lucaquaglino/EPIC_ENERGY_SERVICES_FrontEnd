@@ -66,8 +66,8 @@ export class ClientiComponent implements OnInit {
         console.log('Cliente creato:', clienteCreato);
         // Resetta i campi del nuovo cliente
         this.nuovoCliente = {
-          "idCliente":"",
-           "ragioneSociale": "",
+        "idCliente":"",
+        "ragioneSociale": "",
         "partitaIva":"",
         "emailCliente":"",
         "pec":"",
