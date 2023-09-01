@@ -21,13 +21,14 @@
         <td>{{ fattura.importo }}</td>
         <td>{{ fattura.numeroFattura }}</td>
         <td>{{ fattura.statoFattura }}</td>
-        <td>{{ fattura.cliente.idCliente}}</td>
+        <td>{{ fattura.idCliente }}</td>
+
 
         <td>
           <td >
             <div    class="btn-group" role="group">
               <button class="btn btn-primary" >Modifica</button>
-              <button class="btn btn-danger" >Elimina</button>
+              <button class="btn btn-danger" (click)="onDeleteFatture(fattura.id)">Elimina</button>
             </div>
           </td>
       </tr>

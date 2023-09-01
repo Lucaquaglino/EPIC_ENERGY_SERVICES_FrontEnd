@@ -1,6 +1,6 @@
 
 export interface Fattura {
-  "id":String,
+  "id":string,
   "anno":Number,
   "data":String,
   "importo":Number,

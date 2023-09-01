@@ -89,7 +89,18 @@ export class FattureComponent implements OnInit {
     );
   }
 
+  onDeleteFatture(id: string): void {
+    this.FatturaService.deleteFattura(id).subscribe(
+      () => {
+        console.log('Fattura eliminata con successo.');
+        this.fatture = this.fatture.filter(fattura => fattura.id !== id);
+      },
+      (error) => {
+        console.error("Errore durante eliminazione Fattura" , error);
 
+      }
+    );
+  }
 
 
 }

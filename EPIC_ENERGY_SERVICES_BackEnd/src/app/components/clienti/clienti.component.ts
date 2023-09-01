@@ -119,6 +119,18 @@ export class ClientiComponent implements OnInit {
     )
     }
 
+    onDeleteCliente(id: string): void {
+      this.provinciaService.deleteCliente(id).subscribe(
+        () => {
+          console.log('Cliente eliminato con successo.');
+          this.clienti = this.clienti.filter(cliente => cliente.idCliente !== id);
+        },
+        (error) => {
+          console.error("Errore durante eliminazione cliente" , error);
+
+        }
+      );
+    }
 
 
 }

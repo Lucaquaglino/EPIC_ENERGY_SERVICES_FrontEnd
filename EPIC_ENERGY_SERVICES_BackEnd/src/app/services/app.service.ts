@@ -92,6 +92,27 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
       .pipe(map(response => response.content));
   }
 
+
+
+
+  deleteCliente(id: string): Observable<Clienti[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const url = `${this.urlClienti}/${id}`;
+
+    return this.http.delete<any>(url, { headers });
+  }
+  deleteFattura(id: string): Observable<Fattura[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const url = `${this.urlFattura}/${id}`;
+
+    return this.http.delete<any>(url, { headers });
+  }
 }
 
 

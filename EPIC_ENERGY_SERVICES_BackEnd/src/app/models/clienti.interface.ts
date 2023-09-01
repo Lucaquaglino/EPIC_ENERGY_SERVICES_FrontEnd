@@ -1,5 +1,5 @@
 export interface Clienti {
-  "idCliente":String,
+  "idCliente":string,
     "ragioneSociale": String,
     "partitaIva":String,
     "emailCliente":String,

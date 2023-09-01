@@ -168,7 +168,7 @@
         <!-- <td>{{ cliente.fatture }}</td> -->
         <ul>
           <li *ngFor="let fattura of cliente.fatture">
-importo : {{ fattura.importo}}
+                importo : {{ fattura.importo}}
           </li>
         </ul>
         <!-- <td>{{ cliente.indirizzoSedeL }}</td> -->
@@ -176,7 +176,7 @@ importo : {{ fattura.importo}}
           <td >
             <div    class="btn-group" role="group">
               <button class="btn btn-primary" >Modifica</button>
-              <button class="btn btn-danger" >Elimina</button>
+              <button class="btn btn-danger"  (click)="onDeleteCliente(cliente.idCliente)">Elimina</button>
             </div>
           </td>
       </tr>
