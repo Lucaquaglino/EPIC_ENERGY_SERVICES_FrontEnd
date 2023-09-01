@@ -117,7 +117,7 @@ export class FattureComponent implements OnInit {
 
   getFiltroRagioneSociale():void {
     const rg=this.idCliente;
-    this.FatturaService.getClientiRagioneSociale(this.page, this.pageSize, this.idCliente).subscribe((clienti: Clienti[])=>{
+    this.FatturaService.getClientiRagioneSociale(this.idCliente, this.page, this.pageSize).subscribe((clienti: Clienti[])=>{
       console.log(clienti)},
       (error)=>{
         console.error("Error fetching clienti", error)
