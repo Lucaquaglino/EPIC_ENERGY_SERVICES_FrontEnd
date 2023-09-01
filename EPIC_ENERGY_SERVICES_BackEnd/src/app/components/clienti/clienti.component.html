@@ -1,12 +1,19 @@
 
 
 <div class="container mt-4">
-  <h2>Lista Clienti <button class="btn btn-primary m-2" (click)="showAggiungiForm = true">Aggiungi Cliente</button><button class="btn btn-primary" (click)="toggleFatturatoForm()">Filtra per fatturato Annuo</button> <button class="btn btn-primary m-2" (click)="toggleDataInserimentoForm()">Mostra/Nascondi Filtro Data Inserimento</button></h2>
-    <!-- Bottone per mostrare/nascondere il form -->
-
- <!-- Bottone per mostrare/nascondere il form di filtro per la data di inserimento -->
+  <h2>Lista Clienti <button class="btn btn-primary m-2" (click)="showAggiungiForm = true">Aggiungi Cliente</button><button class="btn btn-primary" (click)="toggleFatturatoForm()">Filtra per fatturato Annuo</button> <button class="btn btn-primary m-2" (click)="toggleDataInserimentoForm()">Filtra per data inserimento</button><button class="btn btn-primary " (click)="toggleDataUltimoContattoForm()">Filtra per data ultimo contatto</button></h2>
 
 
+  <button class="btn btn-primary" (click)="toggleParteRagioneSocialeForm()">Mostra/Nascondi Filtro Parte Ragione Sociale</button>
+
+  <!-- Form per il filtro della parte della ragione sociale -->
+  <div class="form-container" *ngIf="showParteRagioneSocialeForm">
+    <div class="form-group">
+      <label for="parteRagioneSociale">Parte Ragione Sociale:</label>
+      <input type="text" class="form-control" id="parteRagioneSociale" [(ngModel)]="parteRagioneSociale">
+    </div>
+    <button class="btn btn-primary" (click)="applyParteRagioneSocialeFilter()">Applica Filtro</button>
+  </div>
  <!-- Form per il filtro della data di inserimento -->
  <div class="form-container" *ngIf="showDataInserimentoForm">
    <div class="form-group">
@@ -23,6 +30,17 @@
       </div>
       <button class="btn btn-primary" (click)="applyFatturatoFilter()">Applica Filtro</button>
     </div>
+
+ <!-- Form per il filtro della data di ultimo contatto -->
+ <div class="form-container" *ngIf="showDataUltimoContattoForm">
+  <div class="form-group">
+    <label for="dataInserimento">Data Ultimo Contatto:</label>
+    <input type="date" class="form-control" id="dataInserimento" [(ngModel)]="dataInserimento">
+  </div>
+  <button class="btn btn-primary" (click)="applyDataUltimoContattoFilter()">Applica Filtro</button>
+</div>
+ <!-- Form per il filtro parte ragione sociale-->
+
   <div class="container" *ngIf="showAggiungiForm">
   <div class="container">
     <h2>Modifica Cliente</h2>

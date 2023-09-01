@@ -9,10 +9,14 @@ import { AppService } from 'src/app/services/app.service';
 export class ClientiComponent implements OnInit {
   page = 0; // Imposta la pagina iniziale
   pageSize =10;
-ragioneSociale = "ragioneSociale"
+ragioneSociale = ""
 dataInserimento ="dataInserimento"
+dataUltimoContatto="dataUltimoContatto"
+parteRagioneSociale =""
 showFatturatoForm: boolean = false;
 showDataInserimentoForm:boolean = false;
+showDataUltimoContattoForm:boolean = false;
+showParteRagioneSocialeForm:boolean = false;
 toggleFatturatoForm() {
   this.showFatturatoForm = !this.showFatturatoForm;
 }
@@ -20,7 +24,16 @@ toggleDataInserimentoForm() {
   this.showDataInserimentoForm = !this.showDataInserimentoForm
 
 }
+toggleDataUltimoContattoForm() {
+  this.showDataUltimoContattoForm = !this.showDataUltimoContattoForm
+
+}
+toggleParteRagioneSocialeForm() {
+  this.showParteRagioneSocialeForm = !this.showParteRagioneSocialeForm
+
+}
 fatturatoAnnuale= 0;
+
   showAggiungiForm: boolean = false;
   totalPages = 0;
   currentPage = 0;
@@ -61,7 +74,7 @@ fatturatoAnnuale= 0;
     ngOnInit(): void {
 
       this.loadClienti();
-      this.getFiltroRagioneSociale();
+      // this.getFiltroRagioneSociale();
     }
 
 
@@ -162,18 +175,18 @@ fatturatoAnnuale= 0;
 
 
 
-  getFiltroRagioneSociale():void {
+  // getFiltroRagioneSociale():void {
 
-    const rg="ciao";
-    const page = 0;
-    const pageSize =10;
-    this.provinciaService.getClientiRagioneSociale(page,pageSize,rg).subscribe((response)=>{
-      console.log( "filtro",response)},
-      (error)=>{
-        console.error(error)
-      }
-    )
-    }
+  //   const rg="ciao";
+  //   const page = 0;
+  //   const pageSize =10;
+  //   this.provinciaService.getClientiRagioneSociale(page,pageSize,rg).subscribe((response)=>{
+  //     console.log( "filtro",response)},
+  //     (error)=>{
+  //       console.error(error)
+  //     }
+  //   )
+  //   }
 
     onDeleteCliente(id: string): void {
       this.provinciaService.deleteCliente(id).subscribe(
@@ -213,7 +226,33 @@ fatturatoAnnuale= 0;
         }
       );
     }
+
+
+    applyDataUltimoContattoFilter(): void {
+      this.provinciaService.getClientiByDataUltimoContatto(this.dataUltimoContatto, this.page, this.pageSize).subscribe(
+        (clienti: Clienti[]) => {
+          console.log(clienti);
+          this.clienti = clienti;
+        },
+        (error) => {
+          console.error("Error fetching clienti:", error);
+        }
+      );
+    }
+    applyParteRagioneSocialeFilter(): void {
+      this.provinciaService.getClientiByParteRagioneSociale(this.parteRagioneSociale, this.page, this.pageSize).subscribe(
+        (clienti: Clienti[]) => {
+          console.log(clienti);
+          this.clienti = clienti;
+        },
+        (error) => {
+          console.error("Error fetching clienti:", error);
+        }
+      );
+    }
+
 }
+
 
 
 

@@ -79,12 +79,12 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
 
 
 
-  getClientiRagioneSociale(page:number, pageSize:number, parteRagioneSociale:string): Observable<Clienti[]> {
+  getClientiRagioneSociale(parteRagioneSociale:string,page:number, pageSize:number ): Observable<Clienti[]> {
     const params = new HttpParams()
 
     .set('page', page.toString())
     .set('pageSize', pageSize.toString())
-    .set('parteRagioneSociale', parteRagioneSociale)
+    .set('parteRagioneSociale', parteRagioneSociale.toString())
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
@@ -153,6 +153,37 @@ creaFattura(fattura: Fattura, clienteId: string): Observable<Fattura> {
     return this.http.get<any>(`${this.urlClienti}/filter/dataInserimento`, { params, headers })
       .pipe(map(response => response.content));
   }
+
+  getClientiByDataUltimoContatto(dataUltimoContatto: string, page: number, pageSize: number): Observable<Clienti[]> {
+    const params = new HttpParams()
+      .set('dataUltimoContatto', dataUltimoContatto.toString())
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get<any>(`${this.urlClienti}/filter/ultimoContatto`, { params, headers })
+      .pipe(map(response => response.content));
+  }
+
+
+  getClientiByParteRagioneSociale(parteRagioneSociale: string, page: number, pageSize: number): Observable<Clienti[]> {
+    const params = new HttpParams()
+      .set('parteRagioneSociale', parteRagioneSociale.toString())
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get<any>(`${this.urlClienti}/filter/ragioneSociale`, { params, headers })
+      .pipe(map(response => response.content));
+  }
+
+
 }
 
 
