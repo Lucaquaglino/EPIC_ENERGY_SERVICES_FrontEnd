@@ -1,10 +1,10 @@
 
 
 <div class="container mt-4">
-  <h2>Lista Clienti <button class="btn btn-primary m-2" (click)="showAggiungiForm = true">Aggiungi Cliente</button><button class="btn btn-primary" (click)="toggleFatturatoForm()">Filtra per fatturato Annuo</button> <button class="btn btn-primary m-2" (click)="toggleDataInserimentoForm()">Filtra per data inserimento</button><button class="btn btn-primary " (click)="toggleDataUltimoContattoForm()">Filtra per data ultimo contatto</button></h2>
+  <h2>Lista Clienti <button class="btn btn-primary m-2" (click)="showAggiungiForm = true">Aggiungi Cliente</button><button class="btn btn-primary" (click)="toggleFatturatoForm()">Filtra per fatturato Annuo</button> <button class="btn btn-primary m-2" (click)="toggleDataInserimentoForm()">Filtra per data inserimento</button><button class="btn btn-primary " (click)="toggleDataUltimoContattoForm()">Filtra per data ultimo contatto</button><button class="btn btn-primary" (click)="toggleParteRagioneSocialeForm()">Mostra/Nascondi Filtro Parte Ragione Sociale</button></h2>
 
 
-  <button class="btn btn-primary" (click)="toggleParteRagioneSocialeForm()">Mostra/Nascondi Filtro Parte Ragione Sociale</button>
+
 
   <!-- Form per il filtro della parte della ragione sociale -->
   <div class="form-container" *ngIf="showParteRagioneSocialeForm">
