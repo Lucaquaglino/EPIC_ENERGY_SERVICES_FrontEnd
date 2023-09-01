@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fattura } from '../../models/fattura.interface';
 import { AppService } from 'src/app/services/app.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-fatture',
@@ -8,6 +9,7 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./fatture.component.scss']
 })
 export class FattureComponent implements OnInit {
+  showAggiungiForm: boolean = false;
 
   fatture: Fattura[] = [];
   nuovaFattura: Fattura = {
