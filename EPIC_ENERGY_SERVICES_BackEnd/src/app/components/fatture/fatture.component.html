@@ -1,0 +1,148 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between">
+  <h2>Lista Fatture <button class="btn btn-primary" (click)="showAggiungiForm = true">Aggiungi Fattura</button></h2>
+
+  <!-------------------------------- FILTRO BY ID CLIENTE FORM -------------------->
+
+  <button class="btn btn-sm btn-primary m-2" (click)="toggleIdClienteForm()">Mostra/Nascondi Filtro Id Cliente</button>
+  <div class="form-container" *ngIf="showIdClienteFiltro">
+    <div class="form-group">
+      <label for="idCliente">Ricerca per id cliente</label>
+      <input type="text" class="form-control" id="idCliente" [(ngModel)]="idCliente">
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="getFiltroRagioneSociale()">Applica Filtro</button>
+  </div>
+
+  <!-------------------------------- FILTRO BY STATO FATTURA FORM -------------------->
+
+  <button class="btn btn-sm btn-primary m-2" (click)="toggleStatoFatturaForm()">Mostra/Nascondi Filtro Stato fatture</button>
+  <div class="form-container" *ngIf="showStatoFatturaFiltro">
+    <div class="form-group">
+      <label for="statoFattura">Ricerca per stato fatture</label>
+      <input type="text" class="form-control" id="statoFattura" [(ngModel)]="statoFattura">
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="getFiltroStatoFattura()">Applica Filtro</button>
+  </div>
+
+  <!-------------------------------- FILTRO BY DATA FORM -------------------->
+
+  <button class="btn btn-sm btn-primary m-2" (click)="toggleDataFatturaForm()">Mostra/Nascondi Filtro data fattura</button>
+  <div class="form-container" *ngIf="showDataFatturaFiltro">
+    <div class="form-group">
+      <label for="dataFattura">Ricerca per data fattura</label>
+      <input type="text" class="form-control" id="dataFattura" [(ngModel)]="dataFattura">
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="getFiltroDataFattura()">Applica Filtro</button>
+  </div>
+
+  <!-------------------------------- FILTRO BY ID ANNO FORM -------------------->
+
+  <button class="btn btn-sm btn-primary m-2" (click)="toggleAnnoFatturaForm()">Mostra/Nascondi Filtro anno fattura</button>
+  <div class="form-container" *ngIf="showAnnoFatturaFiltro">
+    <div class="form-group">
+      <label for="annoFattura">Ricerca per anno fattura</label>
+      <input type="text" class="form-control" id="annoFattura" [(ngModel)]="annoFattura">
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="getFiltroAnnoFattura()">Applica Filtro</button>
+  </div>
+
+  <!-------------------------------- FILTRO BY RANGE IMPORTI FORM -------------------->
+
+  <!-- <button class="btn btn-sm btn-primary m-2" (click)="toggleIdClienteForm()">Mostra/Nascondi Filtro Id Cliente</button>
+  <div class="form-container" *ngIf="showIdClienteFiltro">
+    <div class="form-group">
+      <label for="idCliente">Ricerca per id cliente</label>
+      <input type="text" class="form-control" id="idCliente" [(ngModel)]="idCliente">
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="getFiltroRagioneSociale()">Applica Filtro</button>
+  </div> -->
+
+</div>
+  <div class="container" *ngIf="showAggiungiForm">
+    <div class="container">
+      <h2>Aggiungi Fattura</h2>
+      <form (submit)="creaNuovaFattura()">
+
+        <div class="form-group">
+          <label for="Anno:">Anno:</label>
+          <input type="number" class="form-control" id="anno" [(ngModel)]="nuovaFattura.anno" name="anno" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Data emissione">Data emissione:</label>
+          <input type="date" class="form-control" id="dataEmissione" [(ngModel)]="nuovaFattura.data" name="dataEmissione" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Importo">Importo:</label>
+          <input type="number" class="form-control" id="importo" [(ngModel)]="nuovaFattura.importo" name="importo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="statoFattura">Stato fattura:</label>
+          <div class="input-group">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="dropdown-icon">▼</span>
+              </div>
+            </div>
+            <select class="form-control" id="statoFattura" [(ngModel)]="nuovaFattura.statoFattura" name="statoFattura" required>
+              <option value="EMESSA">EMESSA</option>
+              <option value="DA_PAGARE">DA_PAGARE</option>
+              <option value="PAGATA">PAGATA</option>
+              <option value="SCADUTA">SCADUTA</option>
+            </select>
+
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="id_cliente">Id cliente:</label>
+          <input type="text" class="form-control" id="id_cliente" [(ngModel)]="nuovaFattura.idCliente" name="id_cliente" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="button" class="btn btn-secondary" (click)="showAggiungiForm = false" >Chiudi</button>
+      </form>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID Fattura</th>
+        <th>Anno</th>
+        <th>Data emissione</th>
+        <th>Importo</th>
+        <th>Numero fattura</th>
+        <th>Stato fattura</th>
+        <th>Id Cliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fattura of fatture">
+
+        <td>{{ fattura.id}}</td>
+        <td>{{ fattura.anno}}</td>
+        <td>{{ fattura.data }}</td>
+        <td>{{ fattura.importo }}</td>
+        <td>{{ fattura.numeroFattura }}</td>
+        <td>{{ fattura.statoFattura }}</td>
+        <td>{{ fattura.idCliente }}</td>
+
+
+        <td>
+          <td >
+            <div    class="btn-group" role="group">
+              <button class="btn btn-primary" >Modifica</button>
+              <button class="btn btn-danger" (click)="onDeleteFatture(fattura.id)">Elimina</button>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
