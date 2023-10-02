@@ -9,7 +9,9 @@ import { Clienti } from 'src/app/models/clienti.interface';
   templateUrl: './fatture.component.html',
   styleUrls: ['./fatture.component.scss']
 })
+
 export class FattureComponent implements OnInit {
+  // Form validation
   showAggiungiForm: boolean = false;
   page = 0;
   pageSize = 10;
